@@ -15,6 +15,9 @@ class Biblioteca:
         self.livros.append(novo_livro)
         print('_____________________________________________')
 
+    def listar_todos_livros(self):
+        pass
+
     def listar_livros_disponiveis(self):
         if len(self.livros) == 0:
             print('Não há livros disponíveis')
@@ -40,3 +43,39 @@ class Biblioteca:
     def registrar_livro_pelo_sistema(self, titulo, autor, id, status_de_emprestimo):
         novo_livro = Livro(titulo, autor, id, status_de_emprestimo)
         self.livros.append(novo_livro)
+
+    def registrar_membro_pelo_sistema(self, nome, id):
+        novo_membro = Membro(nome, id)
+        self.membros.append(novo_membro)
+
+    def alugar_livro(self, nome_membro, nome_livro):
+        membro = next((membro for membro in self.membros if membro.nome.lower() == nome_membro.lower()), None)
+        livro = next((livro for livro in self.livros if livro.titulo.lower() == nome_livro.lower()), None)
+        
+        if not membro:
+            print('Membro não encontrado!')
+            return
+        
+        if not livro:
+            print('Livro não encontrado!')
+            return
+        
+        if livro.status_de_emprestimo != 'disponivel':
+            print(f'O livro "{livro.titulo}" não está disponível para aluguel.')
+            return
+
+        livro.status_de_emprestimo = 'alugado'
+        membro.adicionar_livro_ao_historico(livro)
+        print(f'O livro "{livro.titulo}" foi alugado por {membro.nome}.')
+        print('_____________________________________________')
+
+    def listar_historico_do_membro(self, nome_membro):
+        membro = next((membro for membro in self.membros if membro.nome.lower() == nome_membro.lower()), None)
+
+        if not membro:
+            print('Membro não encontrado!')
+            return
+
+        membro.listar_historico()
+
+        print('_____________________________________________')

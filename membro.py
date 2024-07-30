@@ -6,13 +6,15 @@ class Membro:
         self.idCount = 0
         self.historico = []
 
-    def alugar_livro(self, livro):
+    def adicionar_livro_ao_historico(self, livro):
         try:
             self.historico.append(livro)
-            print(f'Livro: {livro}, alugado com sucesso!')
         except:
-            print(f'Não foi possível alugar o livro: {livro}')
+            print(f'Não foi possível adicionar o livro: {livro} ao histórico.')
 
     def listar_historico(self):
+        if len(self.historico) == 0:
+            print('Este membro não alugou livros.')
+            return
         for i, livro in enumerate(self.historico):
-            print(f'{i+1} - {livro}')
+            print(f'{i+1} - {livro.titulo}')

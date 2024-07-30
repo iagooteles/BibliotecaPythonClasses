@@ -15,3 +15,5 @@ Este é um sistema de biblioteca simples implementado em Python utilizando class
 - `membro.py`: Contém a claase `Membro` que gerencia os membros da biblioteca.
 - `livro.py`: Contém a classe `Livro` que representa um livro.
 - `main.py`: Script principal para interagir com o sistema.
+
+Adicionar lógica de retornar livro!
